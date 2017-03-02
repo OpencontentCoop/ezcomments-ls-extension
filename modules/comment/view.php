@@ -17,6 +17,10 @@ if ( !is_numeric( $Params['ContentObjectID'] ) )
 }
 $contentObjectID = (int)$Params['ContentObjectID'];
 $contentObject = eZContentObject::fetch( $contentObjectID );
+if (!$contentObject instanceof eZContentObject)
+{
+    return $Params['Module']->handleError( eZError::KERNEL_NOT_FOUND, 'kernel' );
+}
 
 // fetch the language
 $iniSite =eZINI::instance();
